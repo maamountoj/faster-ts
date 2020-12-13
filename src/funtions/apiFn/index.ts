@@ -80,7 +80,7 @@ const putApi = async ({ api, url, params, body, config }:any) => {
         : (res = await api.put(path, body))
     }
 
-    response = res.data
+    response = res
   } catch (err) {
     console.log(err)
   }
@@ -127,7 +127,7 @@ const fetchApi = async ({ api, method, url, params, body, config }:any) => {
           : (res = await axios[method](path, config))
       }
 
-      response = res.data
+      response = res
     } else if (method === 'post' || method === 'put') {
       if (!_.isEmpty(api)) {
         _.isEmpty(config)
@@ -138,8 +138,7 @@ const fetchApi = async ({ api, method, url, params, body, config }:any) => {
           ? (res = await axios[method](path, body, config))
           : (res = await axios[method](path, body))
       }
-
-      response = res.data
+      response = res
     } else {
       console.error('Ensure your method please')
     }

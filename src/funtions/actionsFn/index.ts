@@ -26,8 +26,8 @@ export const dispatchActions = (data:any) => {
           console.log(dispatchActions[partsKeys[1]](fn(data)));
           console.log(dispatchActions[partsKeys[2]](false)); */
           dispatch(dispatchActions[partsKeys[0]](true))
-          _.has(val, 'fn')
-            ? dispatch(dispatchActions[partsKeys[1]](val.fn(data)))
+          _.has(val, 'setPayload')
+            ? dispatch(dispatchActions[partsKeys[1]](val.setPayload(data)))
             : dispatch(dispatchActions[partsKeys[1]](data))
           dispatch(dispatchActions[partsKeys[2]](false))
         }
@@ -91,7 +91,7 @@ export const dispatchActionsWithApi = (data:any) => {
           const res = await api.post(urlApi, data); */
           _.has(val, 'setPayload')
             ? dispatch(dispatchActions[partsKeys[1]](val?.setPayload({ data, res })))
-            : dispatch(dispatchActions[partsKeys[1]](res))
+            : dispatch(dispatchActions[partsKeys[1]](res.data))
 
           dispatch(dispatchActions[partsKeys[2]](false))
         }

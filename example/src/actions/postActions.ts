@@ -40,6 +40,10 @@ export const { getPostAction }:any = dispatchActionsWithApi([
   {
     name: 'getPost',
     url: API_POST_URL,
-    method: 'get'
+    method: 'get',
+    setPayload:(data:any)=>{
+      console.log(data)
+      return data?.res.data
+    }
   }
 ])
