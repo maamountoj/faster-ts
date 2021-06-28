@@ -7,14 +7,23 @@ import { getCommentsAction } from '../actions/commentsActions'
 import { Post } from '../components/Post'
 import { Comment } from '../components/Comment'
 
-const SinglePostPage = ({ match }:any) => {
+const SinglePostPage = ({ match }: any) => {
   const dispatch = useDispatch()
-  const loading = useSelector((state:RootStateOrAny) => {
-    return { post: state.post.loadingGetPost, comments: state.comments.loading }
+  const loadingGetPost = useSelector((state: RootStateOrAny) => {
+    return {
+      post: state.post?.post?.loading
+    }
   })
-  const state = useSelector((state:RootStateOrAny) => state)
-  const post = useSelector((state:RootStateOrAny)  => state.post.post)
-  const comments = useSelector((state:RootStateOrAny)  => state.comments.comments)
+  const loadingGetComments = useSelector((state: RootStateOrAny) => {
+    return {
+      comments: state.comments?.comments?.loading
+    }
+  })
+  const state = useSelector((state: RootStateOrAny) => state)
+  const post = useSelector((state: RootStateOrAny) => state.post.post?.data)
+  const comments = useSelector(
+    (state: RootStateOrAny) => state.comments.comments?.data
+  )
   useEffect(() => {
     const { id } = match.params
     dispatch(getPostAction({ params: { id } }))
@@ -22,13 +31,13 @@ const SinglePostPage = ({ match }:any) => {
   }, [dispatch, match])
 
   const renderPost = () => {
-    if (loading.post) return <p>Loading post...</p>
+    if (loadingGetPost.post) return <p>Loading post...</p>
     return <Post post={post} />
   }
 
   const renderComments = () => {
-    if (loading.comments) return <p>Loading comments...</p>
-    return comments.map((comment:any) => (
+    if (loadingGetComments.comments) return <p>Loading comments...</p>
+    return comments.map((comment: any) => (
       <Comment key={comment.id} comment={comment} />
     ))
   }

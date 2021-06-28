@@ -2,34 +2,37 @@ import { createActions } from 'redux-actions'
 import _ from 'lodash'
 import { fetchApi } from '../apiFn'
 
-export const prepareActions = (val:any) => {
-  const newVal = val.replace(/[A-Z]/g, (m:any) => '_' + m).toUpperCase()
+export const prepareActions = (val: any) => {
+  const newVal = val.replace(/[A-Z]/g, (m: any) => '_' + m).toUpperCase()
   return createActions(
     `START_LOADING_${newVal}`,
     `${newVal}`,
-    `STOP_LOADING_${newVal}`
+    `STOP_LOADING_${newVal}`,
+    `ERROR_${newVal}`
   )
 }
-export const dispatchActions = (data:any) => {
+export const dispatchActions = (data: any) => {
   let dataFns = {}
-  data?.map((val:any) => {
+  data?.map((val: any) => {
     const dispatchActions = prepareActions(val?.name)
-    const slice = 3
+    const slice = 4
     let index = 0
     while (index < _.keys(dispatchActions).length) {
       const partsKeys = _.keys(dispatchActions).splice(index, slice)
       dataFns = {
         ...dataFns,
-        [`${val?.name}Action`]: (data = {}) => async (dispatch:any) => {
+        [`${val?.name}Action`]: (data = {}) => async (dispatch: any) => {
           console.log(data)
-          /*  console.log(dispatchActions[partsKeys[0]](true));
-          console.log(dispatchActions[partsKeys[1]](fn(data)));
-          console.log(dispatchActions[partsKeys[2]](false)); */
           dispatch(dispatchActions[partsKeys[0]](true))
-          _.has(val, 'setPayload')
-            ? dispatch(dispatchActions[partsKeys[1]](val.setPayload(data)))
-            : dispatch(dispatchActions[partsKeys[1]](data))
-          dispatch(dispatchActions[partsKeys[2]](false))
+          try {
+            _.has(val, 'setPayload')
+              ? dispatch(dispatchActions[partsKeys[1]](val.setPayload(data)))
+              : dispatch(dispatchActions[partsKeys[1]](data))
+            dispatch(dispatchActions[partsKeys[2]](false))
+          } catch (error) {
+            dispatch(dispatchActions[partsKeys[2]](false))
+            dispatch(dispatchActions[partsKeys[3]](error))
+          }
         }
       }
       index = index + slice
@@ -38,62 +41,71 @@ export const dispatchActions = (data:any) => {
 
   return dataFns
 }
-export const dispatchActionsWithApi = (data:any) => {
+export const dispatchActionsWithApi = (data: any) => {
   let dataFns = {}
-  data?.map((val:any) => {
+  data?.map((val: any) => {
     const { api, name, url, method, config } = val
     const dispatchActions = prepareActions(name)
-    const slice = 3
+    const slice = 4
     let index = 0
     //val = val.charAt(0).toUpperCase() + val.slice(1);
     while (index < _.keys(dispatchActions).length) {
       const partsKeys = _.keys(dispatchActions).splice(index, slice)
       dataFns = {
         ...dataFns,
-        [`${name}Action`]: (data:any) => async (dispatch:any) => {
+        [`${name}Action`]: (data: any) => async (dispatch: any) => {
           let res
           dispatch(dispatchActions[partsKeys[0]](true))
           console.log(data)
-          if (!_.isEmpty(api)) {
-            _.has(data, 'params')
-              ? (res = await fetchApi({
-                  api: api,
-                  method,
-                  url,
-                  params: data?.params,
-                  body: _.has(data, 'body') && method == 'get' ? '' : data.body,
-                  config
-                }))
-              : (res = await fetchApi({
-                  api: api,
-                  method,
-                  url,
-                  body: method == 'get' ? '' : data,
-                  config
-                }))
-          } else {
-            _.has(data, 'params')
-              ? (res = await fetchApi({
-                  method,
-                  url,
-                  params: data?.params,
-                  body: _.has(data, 'body') && method == 'get' ? '' : data.body,
-                  config
-                }))
-              : (res = await fetchApi({
-                  method,
-                  url,
-                  body: method == 'get' ? '' : data,
-                  config
-                }))
-          }
-          /* console.log(res1);
-          const res = await api.post(urlApi, data); */
-          _.has(val, 'setPayload')
-            ? dispatch(dispatchActions[partsKeys[1]](val?.setPayload({ data, res })))
-            : dispatch(dispatchActions[partsKeys[1]](res.data))
+          try {
+            if (!_.isEmpty(api)) {
+              _.has(data, 'params')
+                ? (res = await fetchApi({
+                    api: api,
+                    method,
+                    url,
+                    params: data?.params,
+                    body:
+                      _.has(data, 'body') && method == 'get' ? '' : data.body,
+                    config
+                  }))
+                : (res = await fetchApi({
+                    api: api,
+                    method,
+                    url,
+                    body: method == 'get' ? '' : data,
+                    config
+                  }))
+            } else {
+              _.has(data, 'params')
+                ? (res = await fetchApi({
+                    method,
+                    url,
+                    params: data?.params,
+                    body:
+                      _.has(data, 'body') && method == 'get' ? '' : data.body,
+                    config
+                  }))
+                : (res = await fetchApi({
+                    method,
+                    url,
+                    body: method == 'get' ? '' : data,
+                    config
+                  }))
+            }
+            /* console.log(res1);
+            const res = await api.post(urlApi, data); */
+            _.has(val, 'setPayload')
+              ? dispatch(
+                  dispatchActions[partsKeys[1]](val?.setPayload({ data, res }))
+                )
+              : dispatch(dispatchActions[partsKeys[1]](res.data))
 
-          dispatch(dispatchActions[partsKeys[2]](false))
+            dispatch(dispatchActions[partsKeys[2]](false))
+          } catch (error) {
+            dispatch(dispatchActions[partsKeys[2]](false))
+            dispatch(dispatchActions[partsKeys[3]](error))
+          }
         }
       }
       index = index + slice

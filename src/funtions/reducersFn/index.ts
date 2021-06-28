@@ -1,49 +1,57 @@
 import _ from 'lodash'
 import { handleActions } from 'redux-actions'
 
-export const actionsCondition = (data:any) => {
+export const actionsCondition = (data: any) => {
   let reducerMap = {}
   let initialState = {}
-  data.map((val:any) => {
+  data.map((val: any) => {
     const { key, stateKey, initStateKey, setState } = val
-    const newVal = key.replace(/[A-Z]/g, (m:any) => '_' + m).toUpperCase()
+    const newVal = key.replace(/[A-Z]/g, (m: any) => '_' + m).toUpperCase()
     initialState = {
       ...initialState,
-      [stateKey]: initStateKey,
-      [`loading${key.charAt(0).toUpperCase() + key.slice(1)}`]: false
+      [stateKey]: { data: initStateKey, loading: false, error: '' }
+      // [`loading${key.charAt(0).toUpperCase() + key.slice(1)}`]: false
     }
     reducerMap = {
       ...reducerMap,
       [newVal]: {
-        next: (state:any, action:any) => {
+        next: (state: any, action: any) => {
           if (_.has(val, 'setState')) {
             return {
               ...state,
-              [stateKey]: setState(state, action)
+              [stateKey]: { ...state[stateKey], data: setState(state, action) }
             }
           } else {
             return {
               ...state,
-              [stateKey]: action?.payload
+              [stateKey]: { ...state[stateKey], data: action?.payload }
             }
           }
         }
       },
       [`START_LOADING_${newVal}`]: {
-        next: (state:any, action:any) => {
-          console.log(action)
+        next: (state: any) => {
           return {
             ...state,
-            [`loading${key.charAt(0).toUpperCase() + key.slice(1)}`]: true
+            [stateKey]: { ...state[stateKey], loading: true }
+            // [`loading${key.charAt(0).toUpperCase() + key.slice(1)}`]: true
           }
         }
       },
       [`STOP_LOADING_${newVal}`]: {
-        next: (state:any, action:any) => {
-          console.log(action)
+        next: (state: any) => {
           return {
             ...state,
-            [`loading${key.charAt(0).toUpperCase() + key.slice(1)}`]: false
+            [stateKey]: { ...state[stateKey], loading: false }
+            //[`loading${key.charAt(0).toUpperCase() + key.slice(1)}`]: false
+          }
+        }
+      },
+      [`ERROR_${newVal}`]: {
+        next: (state: any, action: any) => {
+          return {
+            ...state,
+            [stateKey]: { ...state[stateKey], error: action.payload }
           }
         }
       }
@@ -51,7 +59,7 @@ export const actionsCondition = (data:any) => {
   })
   return handleActions(reducerMap, initialState)
 }
-/* export const loadData =(key)=>(state, action) => {
+/* export const loadData =(key)=>(state:any, action:any) => {
    return { 
         ...state,
         [key]: action.payload
