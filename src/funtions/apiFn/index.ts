@@ -1,12 +1,12 @@
 import axios from 'axios'
 import _ from 'lodash'
 
-const getWithParamsUrl = (path:any, params:any) => {
+const getWithParamsUrl = (path: any, params: any) => {
   const regex = /\[(.*?)\]/g
   let index = 0
   let replacePath
   if (!_.isEmpty(params)) {
-    replacePath = path.replace(regex, (match:any, name:any, surname:any) => {
+    replacePath = path.replace(regex, (match: any, name: any, surname: any) => {
       console.log(match)
       console.log(surname)
       let replaceStr = `${params[name]}`
@@ -20,7 +20,7 @@ const getWithParamsUrl = (path:any, params:any) => {
   return replacePath
 }
 
-const getApi:any= async ({ api, url, params, config }:any) => {
+const getApi: any = async ({ api, url, params, config }: any) => {
   let response = null
   let path = getWithParamsUrl(url, params)
   let res = null
@@ -42,7 +42,7 @@ const getApi:any= async ({ api, url, params, config }:any) => {
   return response
 }
 
-const postApi = async ({ api, url, params, body, config }:any) => {
+const postApi = async ({ api, url, params, body, config }: any) => {
   console.log('postApi')
   let response = null
   let path = getWithParamsUrl(url, params)
@@ -65,7 +65,7 @@ const postApi = async ({ api, url, params, body, config }:any) => {
   return response
 }
 
-const putApi = async ({ api, url, params, body, config }:any) => {
+const putApi = async ({ api, url, params, body, config }: any) => {
   let response = null
   let path = getWithParamsUrl(url, params)
   let res = null
@@ -87,7 +87,7 @@ const putApi = async ({ api, url, params, body, config }:any) => {
   return response
 }
 
-const deleteApi = async ({ api, url, params, config }:any) => {
+const deleteApi = async ({ api, url, params, config }: any) => {
   let response = null
   let path = getWithParamsUrl(url, params)
   let res = null
@@ -109,7 +109,7 @@ const deleteApi = async ({ api, url, params, config }:any) => {
   return response
 }
 
-const fetchApi = async ({ api, method, url, params, body, config }:any) => {
+const fetchApi = async ({ api, method, url, params, body, config }: any) => {
   method = method.toLowerCase()
   console.log({ method, url, params, body, config })
   let response = null

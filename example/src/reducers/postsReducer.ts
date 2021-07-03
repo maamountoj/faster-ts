@@ -21,7 +21,19 @@ export default function postsReducer(state = initialState, action) {
 /* ***************** Posts Reducer ***************/
 
 const postsReducer = actionsCondition([
-  { key: 'getPosts', stateKey: 'posts', initStateKey: [] }
+  {
+    key: 'getPosts',
+    stateKey: 'posts',
+    initStateKey: [],
+    anotherActions: [
+      {
+        key: 'addPost',
+        setState: (posts: any, action: any) => {
+          return [...posts?.data, ...action.payload]
+        }
+      }
+    ]
+  }
 ])
 
 export default postsReducer

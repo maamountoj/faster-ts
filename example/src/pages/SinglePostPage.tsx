@@ -19,7 +19,6 @@ const SinglePostPage = ({ match }: any) => {
       comments: state.comments?.comments?.loading
     }
   })
-  const state = useSelector((state: RootStateOrAny) => state)
   const post = useSelector((state: RootStateOrAny) => state.post.post?.data)
   const comments = useSelector(
     (state: RootStateOrAny) => state.comments.comments?.data
@@ -44,7 +43,6 @@ const SinglePostPage = ({ match }: any) => {
 
   return (
     <section>
-      {console.log(state)}
       {renderPost()}
       <h2>Comments</h2>
       {renderComments()}

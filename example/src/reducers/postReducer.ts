@@ -22,10 +22,11 @@ export default function postReducer(state = initialState, action) {
 /* ***************** Post Reducer ***************/
 
 const postReducer = actionsCondition([
-  { key: 'getPost', stateKey: 'post', initStateKey: {},setState:(state:any, action:any)=>{
-    console.log({state, action})
-    return action.payload
-  } }
+  {
+    key: 'getPost',
+    stateKey: 'post',
+    initStateKey: {}
+  }
 ])
 
 export default postReducer

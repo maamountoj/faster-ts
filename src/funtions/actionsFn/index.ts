@@ -22,7 +22,6 @@ export const dispatchActions = (data: any) => {
       dataFns = {
         ...dataFns,
         [`${val?.name}Action`]: (data = {}) => async (dispatch: any) => {
-          console.log(data)
           dispatch(dispatchActions[partsKeys[0]](true))
           try {
             _.has(val, 'setPayload')
@@ -56,7 +55,6 @@ export const dispatchActionsWithApi = (data: any) => {
         [`${name}Action`]: (data: any) => async (dispatch: any) => {
           let res
           dispatch(dispatchActions[partsKeys[0]](true))
-          console.log(data)
           try {
             if (!_.isEmpty(api)) {
               _.has(data, 'params')

@@ -36,13 +36,12 @@ export function getPostAction(id) {
 } */
 /* Became To like this */
 const API_POST_URL = `https://jsonplaceholder.typicode.com/posts/[id]`
-export const { getPostAction }:any = dispatchActionsWithApi([
+export const { getPostAction }: any = dispatchActionsWithApi([
   {
     name: 'getPost',
     url: API_POST_URL,
     method: 'get',
-    setPayload:(data:any)=>{
-      console.log(data)
+    setPayload: (data: any) => {
       return data?.res.data
     }
   }
