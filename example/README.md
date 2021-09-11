@@ -18,3 +18,9 @@ npm start
 yarn install
 yarn start
 ```
+
+## Run Backend
+
+```bash
+json-server --watch -p 7071 db.json
+```
