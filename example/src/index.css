@@ -75,10 +75,19 @@ section h1 {
 }
 
 .button {
+  border-width: inherit;
+  cursor: pointer;
   display: inline-block;
+  text-align: center;
   background: #ea3546;
   color: white;
   border-radius: 4px;
   font-weight: 700;
   padding: 0.75rem 1.5rem;
+  margin: 0.5rem;
+}
+.button:hover {
+  background: white;
+  color: #ea3546;
+  outline: 1px solid #ea3546;
 }

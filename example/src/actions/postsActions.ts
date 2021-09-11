@@ -32,8 +32,16 @@ export function getPostsAction() {
   }
 } */
 /* Became To like this */
-const API_POSTS_URL = 'https://jsonplaceholder.typicode.com/posts'
-export const { getPostsAction, addPostAction }: any = dispatchActionsWithApi([
+/* *** with easy-redux *** */
+const API_POSTS_URL = 'http://localhost:7071/posts'
+const API_POSTS_UPDATE_URL = 'http://localhost:7071/posts/[id]'
+const API_POSTS_DELETE_URL = 'http://localhost:7071/posts/[id]'
+export const {
+  getPostsAction,
+  addPostAction,
+  updatePostAction,
+  deletePostAction
+}: any = dispatchActionsWithApi([
   {
     name: 'getPosts',
     url: API_POSTS_URL,
@@ -42,12 +50,54 @@ export const { getPostsAction, addPostAction }: any = dispatchActionsWithApi([
       return data?.res.data
     }
   },
-  {
+  /*  {
     name: 'addPost',
     url: API_POSTS_URL,
     method: 'get',
     setPayload: (data: any) => {
       return data?.res.data
+    }
+  }, */
+  {
+    name: 'addPost',
+    url: API_POSTS_URL,
+    method: 'POST',
+    setPayload: ({ data, res }: any) => {
+      console.log('data', { data, res })
+      return res.data
+    },
+    config: {
+      headers: {
+        'Content-type': 'application/json'
+      }
+    }
+  },
+  {
+    name: 'updatePost',
+    url: API_POSTS_UPDATE_URL,
+    method: 'PUT',
+    setPayload: ({ data, res }: any) => {
+      console.log('data', { data, res })
+      return res.data
+    },
+    config: {
+      headers: {
+        'Content-type': 'application/json'
+      }
+    }
+  },
+  {
+    name: 'deletePost',
+    url: API_POSTS_DELETE_URL,
+    method: 'DELETE',
+    setPayload: ({ data, res }: any) => {
+      console.log('delete', { data, res })
+      return data.paramsUrl.id
+    },
+    config: {
+      headers: {
+        'Content-type': 'application/json'
+      }
     }
   }
 ])

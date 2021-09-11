@@ -35,14 +35,28 @@ export function getPostAction(id) {
   }
 } */
 /* Became To like this */
-const API_POST_URL = `https://jsonplaceholder.typicode.com/posts/[id]`
-export const { getPostAction }: any = dispatchActionsWithApi([
+/* *** with easy-redux *** */
+const API_POST_BY_ID_URL = `http://localhost:7071/posts/[id]`
+export const { getPostByIdAction }: any = dispatchActionsWithApi([
   {
-    name: 'getPost',
-    url: API_POST_URL,
+    name: 'getPostById',
+    url: API_POST_BY_ID_URL,
     method: 'get',
-    setPayload: (data: any) => {
-      return data?.res.data
+    config: {
+      headers: {
+        //Authorization: 'Your Token' // if you have token
+      }
+    },
+    setPayload: ({ data, res }: any) => {
+      console.log('data', data)
+      console.log('resullt api data', JSON.stringify(res.data))
+      return res.data
+    },
+    stateKey: 'postById',
+    initStateKey: {},
+    setState: (post: any, action: any) => {
+      console.log({ post, action })
+      return { ...action.payload }
     }
   }
 ])

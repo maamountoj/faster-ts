@@ -6,8 +6,8 @@ import commentsReducer from './commentsReducer'
 
 const rootReducer = combineReducers({
   posts: postsReducer,
-  post: postReducer,
-  comments: commentsReducer,
+  postById: postReducer,
+  comments: commentsReducer
 })
 
 export default rootReducer

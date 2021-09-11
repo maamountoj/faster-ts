@@ -19,13 +19,18 @@ export default function postReducer(state = initialState, action) {
   }
 } */
 
+/* *** with easy-redux *** */
 /* ***************** Post Reducer ***************/
 
 const postReducer = actionsCondition([
   {
-    key: 'getPost',
-    stateKey: 'post',
-    initStateKey: {}
+    key: 'getPostById',
+    stateKey: 'postById',
+    initStateKey: {},
+    setState: (post: any, action: any) => {
+      console.log({ post, action })
+      return { ...action.payload }
+    }
   }
 ])
 

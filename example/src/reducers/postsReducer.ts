@@ -27,9 +27,34 @@ const postsReducer = actionsCondition([
     initStateKey: [],
     anotherActions: [
       {
+        key: 'updatePost',
+        setState: (posts: any, action: any) => {
+          alert('update')
+          console.log({ posts, action })
+          console.log('action.payload.id ', action.payload.id)
+          return [
+            ...posts?.data.map((post: any) =>
+              post.id === action.payload.id ? action.payload : post
+            )
+          ]
+        }
+      },
+      {
+        key: 'deletePost',
+        setState: (posts: any, action: any) => {
+          alert('delete')
+          console.log({ posts, action })
+          return [
+            ...posts?.data.filter((post: any) => post.id !== action.payload)
+          ]
+        }
+      },
+      {
         key: 'addPost',
         setState: (posts: any, action: any) => {
-          return [...posts?.data, ...action.payload]
+          alert('add')
+          console.log({ posts, action })
+          return [action.payload, ...posts?.data]
         }
       }
     ]

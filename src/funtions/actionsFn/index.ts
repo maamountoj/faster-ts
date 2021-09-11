@@ -57,12 +57,12 @@ export const dispatchActionsWithApi = (data: any) => {
           dispatch(dispatchActions[partsKeys[0]](true))
           try {
             if (!_.isEmpty(api)) {
-              _.has(data, 'params')
+              _.has(data, 'paramsUrl')
                 ? (res = await fetchApi({
                     api: api,
                     method,
                     url,
-                    params: data?.params,
+                    paramsUrl: data?.paramsUrl,
                     body:
                       _.has(data, 'body') && method == 'get' ? '' : data.body,
                     config
@@ -75,11 +75,11 @@ export const dispatchActionsWithApi = (data: any) => {
                     config
                   }))
             } else {
-              _.has(data, 'params')
+              _.has(data, 'paramsUrl')
                 ? (res = await fetchApi({
                     method,
                     url,
-                    params: data?.params,
+                    paramsUrl: data?.paramsUrl,
                     body:
                       _.has(data, 'body') && method == 'get' ? '' : data.body,
                     config
