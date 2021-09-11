@@ -29,7 +29,6 @@ const postsReducer = actionsCondition([
       {
         key: 'updatePost',
         setState: (posts: any, action: any) => {
-          alert('update')
           console.log({ posts, action })
           console.log('action.payload.id ', action.payload.id)
           return [
@@ -42,7 +41,6 @@ const postsReducer = actionsCondition([
       {
         key: 'deletePost',
         setState: (posts: any, action: any) => {
-          alert('delete')
           console.log({ posts, action })
           return [
             ...posts?.data.filter((post: any) => post.id !== action.payload)
@@ -52,7 +50,6 @@ const postsReducer = actionsCondition([
       {
         key: 'addPost',
         setState: (posts: any, action: any) => {
-          alert('add')
           console.log({ posts, action })
           return [action.payload, ...posts?.data]
         }
