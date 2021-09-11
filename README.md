@@ -15,6 +15,10 @@ yarn add  fast-create-redux
 yarn add -D @types/fast-create-redux
 ```
 
+## See Full Example (see in folder example)
+
+https://github.com/maamountoj/faster/tree/main/example
+
 ## Create actions with dispatchActions and dispatchActionsWithApi
 
 ```jsx
