@@ -1,4 +1,4 @@
-import { dispatchActionsWithApi } from 'fast-create-redux'
+import { dispatchActionsWithApi } from 'faster-create-redux-ts'
 
 /* Became To like this */
 const API_COMMENTS_URL = `http://localhost:7071/comments?postId=[postId]`

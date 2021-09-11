@@ -1,10 +1,10 @@
 {
-  "name": "fast-create-redux",
+  "name": "faster-create-redux-ts",
   "version": "1.0.0",
   "description": "create redux faster",
   "author": "maamountoj",
   "license": "MIT",
-  "repository": "maamountoj/fast-create-redux",
+  "repository": "maamountoj/faster-create-redux-ts",
   "main": "dist/index.js",
   "module": "dist/index.modern.js",
   "source": "src/index.tsx",

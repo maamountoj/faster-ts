@@ -1,4 +1,4 @@
-import { actionsCondition } from 'fast-create-redux'
+import { actionsCondition } from 'faster-create-redux-ts'
 
 /* ***************** Posts Reducer ***************/
 

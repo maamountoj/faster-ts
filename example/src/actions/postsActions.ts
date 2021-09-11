@@ -1,4 +1,4 @@
-import { dispatchActionsWithApi } from 'fast-create-redux'
+import { dispatchActionsWithApi } from 'faster-create-redux-ts'
 
 /* Became To like this */
 /* *** with easy-redux *** */

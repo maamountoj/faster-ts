@@ -1,18 +1,18 @@
-# `fast-create-redux`
+# `faster-create-redux-ts`
 
 > create reducers and actions quickly with types ('START_LOADING','STOP_LOADING','ERROR') will be create automaticaly
 
-[![NPM](https://img.shields.io/npm/v/fast-create-redux.svg)](https://www.npmjs.com/package/fast-create-redux) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+[![NPM](https://img.shields.io/npm/v/faster-create-redux-ts.svg)](https://www.npmjs.com/package/faster-create-redux-ts) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
 ## Install
 
 ```bash
-npm install --save fast-create-redux
-npm install --save-dev @types/fast-create-redux
+npm install --save faster-create-redux-ts
+npm install --save-dev @types/faster-create-redux-ts
 
 # OR
-yarn add  fast-create-redux
-yarn add -D @types/fast-create-redux
+yarn add  faster-create-redux-ts
+yarn add -D @types/faster-create-redux-ts
 ```
 
 ## See Full Example (see in folder example)
@@ -22,7 +22,7 @@ https://github.com/maamountoj/faster/tree/main/example
 ## Create actions with dispatchActions and dispatchActionsWithApi
 
 ```jsx
-import { dispatchActionsWithApi } from 'fast-create-redux'
+import { dispatchActionsWithApi } from 'faster-create-redux-ts'
 
 const API_POSTS_URL = 'https://jsonplaceholder.typicode.com/posts'
 const API_POSTS_URL_BY_USER_ID =
