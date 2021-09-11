@@ -1,5 +1,5 @@
 {
-  "name": "faster-ts-example",
+  "name": "fast-create-redux-example",
   "homepage": ".",
   "version": "0.0.0",
   "private": true,
@@ -23,7 +23,7 @@
     "@types/redux": "^3.6.0",
     "@types/redux-devtools-extension": "^2.13.2",
     "@types/redux-thunk": "^2.1.0",
-    "faster-ts": "link:..",
+    "fast-create-redux": "link:..",
     "react": "link:../node_modules/react",
     "react-dom": "link:../node_modules/react-dom",
     "react-modal": "^3.14.3",

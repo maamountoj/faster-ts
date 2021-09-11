@@ -1,4 +1,21 @@
-import { actionsCondition } from 'faster-ts'
+import { actionsCondition } from 'fast-create-redux'
+
+/* *** with easy-redux *** */
+/* ***************** Post Reducer ***************/
+
+const postReducer = actionsCondition([
+  {
+    key: 'getPostById',
+    stateKey: 'postById',
+    initStateKey: {},
+    setState: (post: any, action: any) => {
+      console.log({ post, action })
+      return { ...action.payload }
+    }
+  }
+])
+
+export default postReducer
 /* import * as actions from '../actions/postActions'
 
 export const initialState = {
@@ -18,20 +35,3 @@ export default function postReducer(state = initialState, action) {
       return state
   }
 } */
-
-/* *** with easy-redux *** */
-/* ***************** Post Reducer ***************/
-
-const postReducer = actionsCondition([
-  {
-    key: 'getPostById',
-    stateKey: 'postById',
-    initStateKey: {},
-    setState: (post: any, action: any) => {
-      console.log({ post, action })
-      return { ...action.payload }
-    }
-  }
-])
-
-export default postReducer
