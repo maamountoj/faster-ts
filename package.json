@@ -4,6 +4,11 @@
   "description": "create redux faster",
   "author": "maamountoj",
   "license": "MIT",
+  "keywords": [
+    "redux",
+    "redux-actions",
+    "redux-thunk"
+  ],
   "repository": "maamountoj/faster-create-redux-ts",
   "main": "dist/index.js",
   "module": "dist/index.modern.js",
