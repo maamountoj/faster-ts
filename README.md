@@ -8,11 +8,10 @@
 
 ```bash
 npm install --save faster-create-redux-ts
-npm install --save-dev @types/faster-create-redux-ts
 
 # OR
 yarn add  faster-create-redux-ts
-yarn add -D @types/faster-create-redux-ts
+
 ```
 
 ## See Full Example (see in folder example)
