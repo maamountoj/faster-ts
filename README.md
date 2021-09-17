@@ -16,7 +16,7 @@ yarn add  faster-create-redux-ts
 
 ## See Full Example (see in folder example)
 
-https://github.com/maamountoj/faster/tree/main/example
+https://github.com/maamountoj/faster-ts/tree/master/example
 
 ## Create actions with dispatchActions and dispatchActionsWithApi
 
